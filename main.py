@@ -1,6 +1,6 @@
 # main.py
 
-from extract import extract_data , get_ids
+from extract import request_data , get_ids, extract_values
 from config import (
     API_ENDPOINT,
     FILE,
@@ -11,7 +11,8 @@ from config import (
 def main():
     try:
         ids = get_ids(FILE)
-        print(extract_data(ids, API_ENDPOINT, BATCH))
+        data = request_data(ids, API_ENDPOINT, BATCH)
+        print(extract_values(data))
     except:
         None
 
