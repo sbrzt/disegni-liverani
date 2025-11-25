@@ -29,7 +29,18 @@ def extract_values(data):
         obj_values = {}
         obj_values["type"] = eval(TARGET_VALUES["type"])
         obj_values["subject"] = eval(TARGET_VALUES["subject"])
-        obj_values["place"] = f"{eval(TARGET_VALUES['province'])} ({eval(TARGET_VALUES['place'])}), {eval(TARGET_VALUES['nation'])}"
+        obj_values["place"] = f"{eval(TARGET_VALUES['region'])} ({eval(TARGET_VALUES['province'])}), {eval(TARGET_VALUES['nation'])}"
+        obj_values["conservation_org"] = eval(TARGET_VALUES["conservation_org"])
+        obj_values["collection"] = eval(TARGET_VALUES["collection"])
+        obj_values["inventory_id"] = eval(TARGET_VALUES["inventory_id"])
+        obj_values["begin_date"] = eval(TARGET_VALUES["begin_date"])
+        
+        #obj_values["date"] = f"{eval(TARGET_VALUES['begin_date'])}-{eval(TARGET_VALUES['end_date'])}"
+        
+        obj_values["author"] = eval(TARGET_VALUES["author"])
+        obj_values["measure_height"] = eval(TARGET_VALUES["measure_height"])
+        obj_values["measure_length"] = eval(TARGET_VALUES["measure_length"])
+        obj_values["measure_unit"] = eval(TARGET_VALUES["measure_unit"])
         
         
         values.append(obj_values)
