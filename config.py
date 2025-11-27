@@ -14,7 +14,7 @@ TARGET_VALUES = {
     "nation":                       "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCS')].values",
     "region":                       "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCR')].values",
     "province":                     "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCP')].values",
-    "città":                        "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCC')].values",
+    "city":                         "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCC')].values",
     "conservation_org":             "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCN')].values",
     "collection":                   "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCM')].values",
     "inventory_id":                 "sections[?(@.cd=='UB')].blocks[*].marks[?(@.cd=='INVN')].values",
@@ -31,8 +31,9 @@ TARGET_VALUES = {
     "acquisition_resp":             "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQN')].values",
     "acquisition_date":             "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQD')].values",
     "acquisition_place":            "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQL')].values",
-    "property":                     "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='CDGG')].values",
-    "path_image":                   "sections[?(@.cd=='DO')].blocks[*].marks[?(@.cd=='FTAZ')].values",                           # +
+    "property":                     "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='CDGS')].values",
+    "path_image_verso":             "sections[?(@.cd=='DO')].blocks[0].marks[?(@.cd=='FTAZ')].values",
+    "path_image_recto":             "sections[?(@.cd=='DO')].blocks[1].marks[?(@.cd=='FTAZ')].values",
     "begin_date":                   "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSI')].values",
-    "end_date":                     "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSF')].values"                        # ~
+    "end_date":                     "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSF')].values"
 }

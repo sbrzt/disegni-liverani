@@ -1,6 +1,6 @@
 # main.py
 
-from extract import request_data , get_ids, extract_values
+from extract import request_data , get_ids, extract_values, to_csv
 from config import (
     API_ENDPOINT,
     FILE,
@@ -10,8 +10,9 @@ from config import (
 
 def main():
     ids = get_ids(FILE)
-    data = request_data(ids, API_ENDPOINT, BATCH)
-    print(extract_values(data))
+    resp = request_data(ids, API_ENDPOINT, BATCH)
+    data = extract_values(resp)
+    return to_csv(data)
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ from jsonpath_ng.ext import parse
 import json
 from tqdm import tqdm
 from config import TARGET_VALUES, IMAGE_URL
+import pandas as pd
 
 
 def get_ids(file):
@@ -27,21 +28,34 @@ def request_data(ids, endpoint, batch):
 
 def look_up(dct, jsonpath_expr):
     jsonpath_expression = parse(jsonpath_expr)
-    match = jsonpath_expression.find(dct)
-    if match:
-        val = match[0].value
-        if isinstance(val, list):
-            return " ".join(val)
-        return str(val)
+    matches = jsonpath_expression.find(dct)
+    if matches:
+        values = []
+        is_image_path = "FTAZ" in jsonpath_expr
+        for match in matches:
+            val = match.value
+            if isinstance(val, list):
+                val = val[0] if val else ""
+            if not isinstance(val, str):
+                val = str(val) if val is not None else ""
+            if val and is_image_path:
+                val = IMAGE_URL + val
+            if val:
+                values.append(val)
+        return values[0]
     return None
 
 
 def extract_values(data):
     values = []
-    for dct in data:
+    for dct in tqdm(data):
         obj_values = {}
-        for key, jsonpath_expr in tqdm(TARGET_VALUES.items()):
+        for key, jsonpath_expr in tqdm(TARGET_VALUES.items()):                
             obj_values[key] = look_up(dct, jsonpath_expr)        
         values.append(obj_values)
-        print(obj_values)
     return values
+
+
+def to_csv(data):
+    df = pd.DataFrame.from_dict(data)
+    return df.to_csv("liverani.csv", index=False)
