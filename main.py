@@ -9,12 +9,9 @@ from config import (
 
 
 def main():
-    try:
-        ids = get_ids(FILE)
-        data = request_data(ids, API_ENDPOINT, BATCH)
-        print(extract_values(data))
-    except:
-        None
+    ids = get_ids(FILE)
+    data = request_data(ids, API_ENDPOINT, BATCH)
+    print(extract_values(data))
 
 
 if __name__ == "__main__":

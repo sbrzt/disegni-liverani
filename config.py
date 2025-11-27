@@ -1,23 +1,38 @@
-# config.py
+# config.py 
 
 API_ENDPOINT = "https://bbcc.regione.emilia-romagna.it/samira/api/card/"
 FILE = "lista_link_liverani_pater.txt"
 BATCH = 50
+IMAGE_URL = "https://bbcc.regione.emilia-romagna.it/pater/data"
+
 
 # --- Values to extract ---
 TARGET_VALUES = {
-    "type": 'dct["sections"][1]["blocks"][0]["marks"][0]["values"][0]',
-    "subject": 'dct["sections"][1]["blocks"][1]["marks"][0]["values"][0]',
-    "nation": 'dct["sections"][2]["blocks"][0]["marks"][0]["values"][0]',
-    "region": 'dct["sections"][2]["blocks"][0]["marks"][1]["values"][0]',
-    "province": 'dct["sections"][2]["blocks"][0]["marks"][2]["values"][0]',
-    "conservation_org": 'dct["sections"][2]["blocks"][1]["marks"][2]["values"][0]',
-    "collection": 'dct["sections"][2]["blocks"][1]["marks"][4]["values"][0]',
-    "inventory_id": 'dct["sections"][3]["blocks"][0]["marks"][0]["values"][0]',
-    "author": 'dct["sections"][5]["blocks"][0]["marks"][0]["values"][0]',
-    "measure_height": 'dct["sections"][6]["blocks"][0]["marks"][1]["values"][0]',
-    "measure_length": 'dct["sections"][6]["blocks"][0]["marks"][2]["values"][0]',
-    "measure_unit": 'dct["sections"][6]["blocks"][0]["marks"][0]["values"][0]',
-    "begin_date": 'dct["sections"][4]["blocks"][1]["marks"][0]["values"][0]',
-    "end_date": 'dct["sections"][4]["blocks"][1]["marks"][2]["values"][0]'
+    "id":                           "id",
+    "type":                         "sections[?(@.cd=='OG')].blocks[*].marks[?(@.cd=='OGTD')].values",
+    "subject":                      "sections[?(@.cd=='OG')].blocks[*].marks[?(@.cd=='SGTI')].values",
+    "nation":                       "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCS')].values",
+    "region":                       "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCR')].values",
+    "province":                     "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCP')].values",
+    "città":                        "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCC')].values",
+    "conservation_org":             "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCN')].values",
+    "collection":                   "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCM')].values",
+    "inventory_id":                 "sections[?(@.cd=='UB')].blocks[*].marks[?(@.cd=='INVN')].values",
+    "author":                       "sections[?(@.cd=='AU')].blocks[*].marks[?(@.cd=='AUTN')].values",
+    "measure_height":               "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISA')].values",
+    "measure_length":               "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISL')].values",
+    "measure_unit":                 "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISU')].values",
+    "materials":                    "sections[?(@.cd=='MT')].marks[?(@.cd=='MTC')].values",
+    "conservation_status":          "sections[?(@.cd=='CO')].blocks[*].marks[?(@.cd=='STCC')].values",
+    "conservation_status_desc":     "sections[?(@.cd=='CO')].blocks[*].marks[?(@.cd=='STCS')].values",
+    "description":                  "sections[?(@.cd=='DA')].blocks[*].marks[?(@.cd=='DESO')].values",
+    "notes":                        "sections[?(@.cd=='DA')].marks[?(@.cd=='NSC')].values",
+    "acquisition_type":             "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQT')].values",
+    "acquisition_resp":             "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQN')].values",
+    "acquisition_date":             "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQD')].values",
+    "acquisition_place":            "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQL')].values",
+    "property":                     "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='CDGG')].values",
+    "path_image":                   "sections[?(@.cd=='DO')].blocks[*].marks[?(@.cd=='FTAZ')].values",                           # +
+    "begin_date":                   "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSI')].values",
+    "end_date":                     "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSF')].values"                        # ~
 }

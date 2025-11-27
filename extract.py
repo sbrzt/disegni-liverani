@@ -1,9 +1,11 @@
 # extract.py
 
 import requests
+from jsonpath_ng.ext import parse
 import json
 from tqdm import tqdm
-from config import TARGET_VALUES
+from config import TARGET_VALUES, IMAGE_URL
+
 
 def get_ids(file):
     with open(file) as f:
@@ -23,28 +25,23 @@ def request_data(ids, endpoint, batch):
     return data
 
 
+def look_up(dct, jsonpath_expr):
+    jsonpath_expression = parse(jsonpath_expr)
+    match = jsonpath_expression.find(dct)
+    if match:
+        val = match[0].value
+        if isinstance(val, list):
+            return " ".join(val)
+        return str(val)
+    return None
+
+
 def extract_values(data):
     values = []
     for dct in data:
         obj_values = {}
-        obj_values["type"] = eval(TARGET_VALUES["type"])
-        obj_values["subject"] = eval(TARGET_VALUES["subject"])
-        obj_values["place"] = f"{eval(TARGET_VALUES['region'])} ({eval(TARGET_VALUES['province'])}), {eval(TARGET_VALUES['nation'])}"
-        obj_values["conservation_org"] = eval(TARGET_VALUES["conservation_org"])
-        obj_values["collection"] = eval(TARGET_VALUES["collection"])
-        obj_values["inventory_id"] = eval(TARGET_VALUES["inventory_id"])
-        obj_values["begin_date"] = eval(TARGET_VALUES["begin_date"])
-        
-        #obj_values["date"] = f"{eval(TARGET_VALUES['begin_date'])}-{eval(TARGET_VALUES['end_date'])}"
-        
-        obj_values["author"] = eval(TARGET_VALUES["author"])
-        obj_values["measure_height"] = eval(TARGET_VALUES["measure_height"])
-        obj_values["measure_length"] = eval(TARGET_VALUES["measure_length"])
-        obj_values["measure_unit"] = eval(TARGET_VALUES["measure_unit"])
-        
-        
+        for key, jsonpath_expr in tqdm(TARGET_VALUES.items()):
+            obj_values[key] = look_up(dct, jsonpath_expr)        
         values.append(obj_values)
-    for value in values:
-        print(value)
-
-
+        print(obj_values)
+    return values
