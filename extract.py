@@ -4,7 +4,7 @@ import requests
 from jsonpath_ng.ext import parse
 import json
 from tqdm import tqdm
-from config import TARGET_VALUES, IMAGE_URL
+from config import TARGET_VALUES, IMAGE_URL, DATASET
 import pandas as pd
 
 
@@ -58,4 +58,4 @@ def extract_values(data):
 
 def to_csv(data):
     df = pd.DataFrame.from_dict(data)
-    return df.to_csv("liverani.csv", index=False)
+    return df.to_csv(DATASET, index=False)

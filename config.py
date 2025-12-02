@@ -4,6 +4,7 @@ API_ENDPOINT = "https://bbcc.regione.emilia-romagna.it/samira/api/card/"
 FILE = "lista_link_liverani_pater.txt"
 BATCH = 50
 IMAGE_URL = "https://bbcc.regione.emilia-romagna.it/pater/data"
+DATASET = "dataset_pater.csv"
 
 
 # --- Values to extract ---
