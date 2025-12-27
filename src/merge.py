@@ -8,8 +8,7 @@ from config import (
 
 def merge_columns(dataset_1, dataset_2, columns, key):
     df_1 = pd.read_csv(dataset_1)
-    df_2 = pd.read_csv(dataset_2)
-    df_columns = df_2[columns].copy()
+    df_columns = pd.read_csv(dataset_2, usecols=columns)
     df_1[key] = df_1[key].astype(str)
     df_columns[key] = df_columns[key].dropna().astype(int).astype(str)
     merged = df_1.merge(df_columns, how="inner", on=key)

@@ -13,6 +13,12 @@ import pandas as pd
 from src.merge import merge_columns
 
 
+COMPILED_PATHS = {}
+for key, val in TARGET_VALUES.items():
+    if len(val) > 2:
+        COMPILED_PATHS[val[0]] = parse(val[2])
+
+
 def get_ids(file):
     with open(file) as f:
         ids_str = f.read()
@@ -31,12 +37,12 @@ def request_data(ids, endpoint, batch):
     return data
 
 
-def look_up(dct, jsonpath_expr):
-    jsonpath_expression = parse(jsonpath_expr)
-    matches = jsonpath_expression.find(dct)
+def look_up(dct, field_name, is_image_path):
+    if field_name not in COMPILED_PATHS:
+        return None
+    matches = COMPILED_PATHS[field_name].find(dct)
     if matches:
         values = []
-        is_image_path = "FTAZ" in jsonpath_expr
         for match in matches:
             val = match.value
             if isinstance(val, list):
@@ -47,7 +53,7 @@ def look_up(dct, jsonpath_expr):
                 val = IMAGE_PREFIX + val
             if val:
                 values.append(val)
-        return values[0]
+        return values[0] if values else None
     return None
 
 
@@ -56,11 +62,12 @@ def extract_values(data):
     for dct in tqdm(data):
         obj_values = {}
         for value in tqdm(TARGET_VALUES.values()):
-            try:
-                jsonpath_expr = value[2]
-                obj_values[value[0]] = look_up(dct, jsonpath_expr)
-            except:
+            field_name = value[0]
+            raw_path = value[2] if len(value) > 2 else ""
+            if not raw_path:
                 continue
+            is_image = "FTAZ" in raw_path
+            obj_values[field_name] = look_up(dct, field_name, is_image)
         values.append(obj_values)
     return values
 

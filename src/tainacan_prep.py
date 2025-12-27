@@ -3,6 +3,8 @@
 import os
 import requests
 import pandas as pd
+from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor
 from config import (
     TARGET_VALUES,
     LABEL_SEPARATOR,
@@ -16,30 +18,38 @@ from config import (
 )
 
 
+def download_single(args):
+    url, path = args
+    if not url:
+        return
+    try:
+        resp = requests.get(url, timeout=10)
+        with open(path, "wb") as f:
+            f.write(resp.content)
+    except Exception as e:
+        print(f"Error on {url}: {e}")
+
 def download_images(data):
     ids = data[TARGET_VALUES[1][0]]
     verso_urls = data[TARGET_VALUES[25][0]].tolist()
     recto_urls = data[TARGET_VALUES[26][0]].tolist()
     img_dir = os.path.join('data','img')
     recto_dir = os.path.join('data','img', 'recto')
-    verso_dir = os.path.join('data','img', 'verso') 
+    verso_dir = os.path.join('data','img', 'verso')
     if not os.path.exists(img_dir):
         os.makedirs(img_dir)
     if not os.path.exists(recto_dir):
         os.makedirs(recto_dir)
-        for i, url in enumerate(recto_urls):
-            if url:
-                img_data = requests.get(url).content
-                with open(f'{recto_dir}/{ids[i]}-r.jpg', 'wb') as handler:
-                    handler.write(img_data)
     if not os.path.exists(verso_dir):
         os.makedirs(verso_dir)
-        for i, url in enumerate(verso_urls):
-            if url:
-                img_data = requests.get(url).content
-                with open(f'{verso_dir}/{ids[i]}-v.jpg', 'wb') as handler:
-                    handler.write(img_data)
-    return
+    
+    tasks = []
+    for i, url in enumerate(verso_urls):
+        tasks.append((url, f'{verso_dir}/{ids[i]}-v.jpg'))
+    for i, url in enumerate(recto_urls):
+        tasks.append((url, f'{recto_dir}/{ids[i]}-r.jpg'))
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        list(tqdm(executor.map(download_single, tasks), total=len(tasks)))
 
 
 def data_prep(data):
