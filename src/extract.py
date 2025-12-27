@@ -1,11 +1,16 @@
-# extract.py
+# src/extract.py
 
 import requests
 from jsonpath_ng.ext import parse
 import json
 from tqdm import tqdm
-from config import TARGET_VALUES, IMAGE_URL, DATASET
+from config import (
+    TARGET_VALUES, 
+    IMAGE_PREFIX, 
+    API_OUTPUT
+)
 import pandas as pd
+from src.merge import merge_columns
 
 
 def get_ids(file):
@@ -39,7 +44,7 @@ def look_up(dct, jsonpath_expr):
             if not isinstance(val, str):
                 val = str(val) if val is not None else ""
             if val and is_image_path:
-                val = IMAGE_URL + val
+                val = IMAGE_PREFIX + val
             if val:
                 values.append(val)
         return values[0]
@@ -50,12 +55,17 @@ def extract_values(data):
     values = []
     for dct in tqdm(data):
         obj_values = {}
-        for key, jsonpath_expr in tqdm(TARGET_VALUES.items()):                
-            obj_values[key] = look_up(dct, jsonpath_expr)        
+        for value in tqdm(TARGET_VALUES.values()):
+            try:
+                jsonpath_expr = value[2]
+                obj_values[value[0]] = look_up(dct, jsonpath_expr)        
+            except Exception as e:
+                print(e)
+                continue
         values.append(obj_values)
     return values
 
 
 def to_csv(data):
     df = pd.DataFrame.from_dict(data)
-    return df.to_csv(DATASET, index=False)
+    return df.to_csv(API_OUTPUT, index=False)
