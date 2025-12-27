@@ -2,7 +2,6 @@
 
 import requests
 from jsonpath_ng.ext import parse
-import json
 from tqdm import tqdm
 from config import (
     TARGET_VALUES, 
@@ -10,13 +9,12 @@ from config import (
     API_OUTPUT
 )
 import pandas as pd
-from src.merge import merge_columns
 
 
 COMPILED_PATHS = {}
-for key, val in TARGET_VALUES.items():
-    if len(val) > 2:
-        COMPILED_PATHS[val[0]] = parse(val[2])
+for value in TARGET_VALUES.values():
+    if "path" in value:
+        COMPILED_PATHS[value["key"]] = parse(value["path"])
 
 
 def get_ids(file):
@@ -62,8 +60,8 @@ def extract_values(data):
     for dct in tqdm(data):
         obj_values = {}
         for value in tqdm(TARGET_VALUES.values()):
-            field_name = value[0]
-            raw_path = value[2] if len(value) > 2 else ""
+            field_name = value["key"]
+            raw_path = value["path"] if "path" in value else ""
             if not raw_path:
                 continue
             is_image = "FTAZ" in raw_path

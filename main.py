@@ -3,7 +3,7 @@
 import pandas as pd
 from src.extract import request_data , get_ids, extract_values, to_csv
 from src.merge import merge_columns
-from src.tainacan_prep import data_prep, download_images
+from src.prep import data_prep, download_images
 from config import (
     API_ENDPOINT,
     ID_LIST,

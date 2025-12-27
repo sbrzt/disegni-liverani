@@ -31,163 +31,229 @@ TEXT_PARAMETER = 'text'
 # Values to extract
 TARGET_VALUES = {
     1: {
-        0: "id",
-        1: "Identificativo",
-        2: "id"
+        "key": "id",
+        "label": "Identificativo",
+        "path": "id",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PRIVATE_PARAMETER
         },
     2: {
-        0: "type",
-        1: "Tipologia",
-        2: "sections[?(@.cd=='OG')].blocks[*].marks[?(@.cd=='OGTD')].values"
+        "key": "type",
+        "label": "Tipologia",
+        "path": "sections[?(@.cd=='OG')].blocks[*].marks[?(@.cd=='OGTD')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     3: {
-        0: "subject",
-        1: "Soggetto",
-        2: "sections[?(@.cd=='OG')].blocks[*].marks[?(@.cd=='SGTI')].values"
+        "key": "subject",
+        "label": "Soggetto",
+        "path": "sections[?(@.cd=='OG')].blocks[*].marks[?(@.cd=='SGTI')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     4: {
-        0: "nation",
-        1: "Nazione",
-        2: "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCS')].values"
+        "key": "nation",
+        "label": "Nazione",
+        "path": "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCS')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     5: {
-        0: "region",
-        1: "Regione",
-        2: "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCR')].values"
+        "key": "region",
+        "label": "Regione",
+        "path": "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCR')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     6: {
-        0: "province",
-        1: "Provincia",
-        2: "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCP')].values"
+        "key": "province",
+        "label": "Provincia",
+        "path": "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCP')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     7: {
-        0: "city",
-        1: "Città",
-        2: "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCC')].values"
+        "key": "city",
+        "label": "Città",
+        "path": "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='PVCC')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     8: {
-        0: "conservation_org",
-        1: "Ente di conservazione",
-        2: "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCN')].values"
+        "key": "conservation_org",
+        "label": "Ente di conservazione",
+        "path": "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCN')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     9: {
-        0: "collection",
-        1: "Collezione",
-        2: "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCM')].values"
+        "key": "collection",
+        "label": "Collezione",
+        "path": "sections[?(@.cd=='LC')].blocks[*].marks[?(@.cd=='LDCM')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     10: {
-        0: "inventory_id",
-        1: "Numero di inventario",
-        2: "sections[?(@.cd=='UB')].blocks[*].marks[?(@.cd=='INVN')].values"
+        "key": "inventory_id",
+        "label": "Numero di inventario",
+        "path": "sections[?(@.cd=='UB')].blocks[*].marks[?(@.cd=='INVN')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     11: {
-        0: "author",
-        1: "Autore",
-        2: "sections[?(@.cd=='AU')].blocks[*].marks[?(@.cd=='AUTN')].values"
+        "key": "author",
+        "label": "Autore",
+        "path": "sections[?(@.cd=='AU')].blocks[*].marks[?(@.cd=='AUTN')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     12: {
-        0: "measure_height",
-        1: "Altezza",
-        2: "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISA')].values"
+        "key": "measure_height",
+        "label": "Altezza",
+        "path": "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISA')].values",
+        "type": NUMERIC_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     13: {
-        0: "measure_length",
-        1: "Lunghezza",
-        2: "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISL')].values"
+        "key": "measure_length",
+        "label": "Lunghezza",
+        "path": "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISL')].values",
+        "type": NUMERIC_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     14: {
-        0: "measure_unit",
-        1: "Unità di misura",
-        2: "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISU')].values"
+        "key": "measure_unit",
+        "label": "Unità di misura",
+        "path": "sections[?(@.cd=='MT')].blocks[*].marks[?(@.cd=='MISU')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PRIVATE_PARAMETER
         },
     15: {
-        0: "materials", 
-        1: "Materiali usati",
-        2: "sections[?(@.cd=='MT')].marks[?(@.cd=='MTC')].values"
+        "key": "materials", 
+        "label": "Materiali usati",
+        "path": "sections[?(@.cd=='MT')].marks[?(@.cd=='MTC')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     16: {
-        0: "conservation_status",
-        1: "Stato di conservazione",
-        2: "sections[?(@.cd=='CO')].blocks[*].marks[?(@.cd=='STCC')].values"
+        "key": "conservation_status",
+        "label": "Stato di conservazione",
+        "path": "sections[?(@.cd=='CO')].blocks[*].marks[?(@.cd=='STCC')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     17: {
-        0: "conservation_status_desc",
-        1: "Descrizione di conservazione",
-        2: "sections[?(@.cd=='CO')].blocks[*].marks[?(@.cd=='STCS')].values"
+        "key": "conservation_status_desc",
+        "label": "Descrizione di conservazione",
+        "path": "sections[?(@.cd=='CO')].blocks[*].marks[?(@.cd=='STCS')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     18: {
-        0: "description",
-        1: "Descrizione",
-        2: "sections[?(@.cd=='DA')].blocks[*].marks[?(@.cd=='DESO')].values"
+        "key": "description",
+        "label": "Descrizione",
+        "path": "sections[?(@.cd=='DA')].blocks[*].marks[?(@.cd=='DESO')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     19: {
-        0: "notes",
-        1: "Note",
-        2: "sections[?(@.cd=='DA')].marks[?(@.cd=='NSC')].values"
+        "key": "notes",
+        "label": "Note",
+        "path": "sections[?(@.cd=='DA')].marks[?(@.cd=='NSC')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     20: {
-        0: "acquisition_type",
-        1: "Modalità di acquisizione",
-        2: "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQT')].values"
+        "key": "acquisition_type",
+        "label": "Modalità di acquisizione",
+        "path": "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQT')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     21: {
-        0: "acquisition_resp",
-        1: "Responsabile dell'acquisizione",
-        2: "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQN')].values"
+        "key": "acquisition_resp",
+        "label": "Responsabile dell'acquisizione",
+        "path": "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQN')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     22: {
-        0: "acquisition_date",
-        1: "Data di acquisizione",
-        2: "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQD')].values"
+        "key": "acquisition_date",
+        "label": "Data di acquisizione",
+        "path": "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQD')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     23: {
-        0: "acquisition_place",
-        1: "Luogo di acquisizione",
-        2: "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQL')].values"
+        "key": "acquisition_place",
+        "label": "Luogo di acquisizione",
+        "path": "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='ACQL')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     24: {
-        0: "property",
-        1: "Proprietà",
-        2: "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='CDGS')].values"
+        "key": "property",
+        "label": "Proprietà",
+        "path": "sections[?(@.cd=='TU')].blocks[*].marks[?(@.cd=='CDGS')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     25: {
-        0: "path_image_verso",
-        1: "Link (verso)",
-        2: "sections[?(@.cd=='DO')].blocks[0].marks[?(@.cd=='FTAZ')].values"
+        "key": "path_image_verso",
+        "label": "Link (verso)",
+        "path": "sections[?(@.cd=='DO')].blocks[0].marks[?(@.cd=='FTAZ')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PRIVATE_PARAMETER
         },
     26: {
-        0: "path_image_recto",
-        1: "Link (recto)",
-        2: "sections[?(@.cd=='DO')].blocks[1].marks[?(@.cd=='FTAZ')].values"
+        "key": "path_image_recto",
+        "label": "Link (recto)",
+        "path": "sections[?(@.cd=='DO')].blocks[1].marks[?(@.cd=='FTAZ')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PRIVATE_PARAMETER
         },
     27: {
-        0: "begin_date",
-        1: "Data di creazione (inizio)",
-        2: "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSI')].values"
+        "key": "begin_date",
+        "label": "Data di creazione (inizio)",
+        "path": "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSI')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     28: {
-        0: "end_date",
-        1: "Data di creazione (fine)",
-        2: "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSF')].values"
+        "key": "end_date",
+        "label": "Data di creazione (fine)",
+        "path": "sections[?(@.cd=='DT')].blocks[*].marks[?(@.cd=='DTSF')].values",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     29: {
-        0: "is_existing",
-        1: "Esiste"
+        "key": "is_existing",
+        "label": "Esiste",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PRIVATE_PARAMETER
         },
     30: {
-        0: "directions",
-        1: "Indicazioni"
+        "key": "directions",
+        "label": "Indicazioni",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PRIVATE_PARAMETER
         },
     31: {
-        0: "link",
-        1: "Link (Pater)"
+        "key": "link",
+        "label": "Link (Pater)",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     32: {
-        0: "latitude",
-        1: "Latitudine"
+        "key": "latitude",
+        "label": "Latitudine",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         },
     33: {
-        0: "longitude",
-        1: "Longitudine"
+        "key": "longitude",
+        "label": "Longitudine",
+        "type": TEXT_PARAMETER,
+        "status": STATUS_PUBLIC_PARAMETER
         }
 }
