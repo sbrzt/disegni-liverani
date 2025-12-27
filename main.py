@@ -1,7 +1,7 @@
 # main.py
 
 import pandas as pd
-from src.extract import request_data , get_ids, extract_values, to_csv
+from src.extract import request_data , get_ids, extract_values
 from src.merge import merge_columns
 from src.prep import data_prep, download_images
 from config import (
@@ -18,10 +18,15 @@ from config import (
 
 def main():
     ids = get_ids(ID_LIST)
+    if not ids:
+        return
     resp = request_data(ids, API_ENDPOINT, BATCH)
     data = extract_values(resp)
-    download_images(pd.DataFrame(data))
-    return to_csv(data), merge_columns(API_OUTPUT, DATASET_MANUAL, COLUMNS, KEY), data_prep(OUTPUT_ARCHIVE)
+    df = pd.DataFrame(data)
+    df.to_csv(API_OUTPUT, index=False)
+    download_images(df)
+    merge_columns(API_OUTPUT, DATASET_MANUAL, COLUMNS, KEY)
+    data_prep(OUTPUT_ARCHIVE) 
 
 
 if __name__ == "__main__":

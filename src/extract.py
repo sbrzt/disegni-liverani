@@ -68,8 +68,3 @@ def extract_values(data):
             obj_values[field_name] = look_up(dct, field_name, is_image)
         values.append(obj_values)
     return values
-
-
-def to_csv(data):
-    df = pd.DataFrame.from_dict(data)
-    return df.to_csv(API_OUTPUT, index=False)
