@@ -17,42 +17,37 @@ from config import (
 
 
 def download_images(data):
-
     ids = data[TARGET_VALUES[1][0]]
     verso_urls = data[TARGET_VALUES[25][0]].tolist()
     recto_urls = data[TARGET_VALUES[26][0]].tolist()
-    
     img_dir = os.path.join('data','img')
     recto_dir = os.path.join('data','img', 'recto')
     verso_dir = os.path.join('data','img', 'verso') 
-
     if not os.path.exists(img_dir):
         os.makedirs(img_dir)
     if not os.path.exists(recto_dir):
         os.makedirs(recto_dir)
+        for i, url in enumerate(recto_urls):
+            if url:
+                img_data = requests.get(url).content
+                with open(f'{recto_dir}/{ids[i]}-r.jpg', 'wb') as handler:
+                    handler.write(img_data)
     if not os.path.exists(verso_dir):
         os.makedirs(verso_dir)
-
-    for i, url in enumerate(verso_urls):
-        if url:
-            img_data = requests.get(url).content
-            with open(f'{verso_dir}/{ids[i]}-v.jpg', 'wb') as handler:
-                handler.write(img_data)
-
-    for i, url in enumerate(recto_urls):
-        if url:
-            img_data = requests.get(url).content
-            with open(f'{recto_dir}/{ids[i]}-r.jpg', 'wb') as handler:
-                handler.write(img_data)
-    
+        for i, url in enumerate(verso_urls):
+            if url:
+                img_data = requests.get(url).content
+                with open(f'{verso_dir}/{ids[i]}-v.jpg', 'wb') as handler:
+                    handler.write(img_data)
     return
 
 
 def data_prep(data):
     """
     """
-    #data["special_document"] = "file:disegni/" + data["id"] + ".jpg"
     df = pd.read_csv(data)
+    df["special_document"] = "file:disegni/" + df[TARGET_VALUES[1][0]].astype(str) + "-v.jpg"
+    df["special_attachments"] = "disegni/" + df[TARGET_VALUES[1][0]].astype(str) + "-v.jpg; disegni/" + df[TARGET_VALUES[1][0]].astype(str) + "-r.jpg"
     df_2 = df.rename(columns={
         TARGET_VALUES[1][0]: LABEL_SEPARATOR.join([TARGET_VALUES[1][1],TEXT_PARAMETER,STATUS_PRIVATE_PARAMETER]),
         TARGET_VALUES[2][0]: LABEL_SEPARATOR.join([TARGET_VALUES[2][1],TEXT_PARAMETER,STATUS_PUBLIC_PARAMETER]),

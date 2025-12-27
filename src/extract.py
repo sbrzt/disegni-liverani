@@ -58,9 +58,8 @@ def extract_values(data):
         for value in tqdm(TARGET_VALUES.values()):
             try:
                 jsonpath_expr = value[2]
-                obj_values[value[0]] = look_up(dct, jsonpath_expr)        
-            except Exception as e:
-                print(e)
+                obj_values[value[0]] = look_up(dct, jsonpath_expr)
+            except:
                 continue
         values.append(obj_values)
     return values
