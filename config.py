@@ -18,7 +18,7 @@ OUTPUT_ARCHIVE = "data/dataset_disegni.csv"
 OUTPUT_PUBLISH = "data/db_liverani.csv"
 KEY = "id"
 
-# Tainacan CSV import syntax constants
+# CSV import syntax constants
 LABEL_SEPARATOR = "|"
 DB_KEY_PARAMETER = 'collection_key_yes'
 STATUS_PRIVATE_PARAMETER = 'status_private'

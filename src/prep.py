@@ -19,6 +19,17 @@ from config import (
 
 
 def download_single(args):
+    """
+    Downloads a single image file from a URL.
+
+    Args:
+        args (tuple): A tuple containing (url, destination_path).
+            - url (str): The direct link to the image.
+            - path (str): The local file path where the image will be saved.
+
+    Returns:
+        None
+    """
     url, path = args
     if not url:
         return
@@ -29,7 +40,18 @@ def download_single(args):
     except Exception as e:
         print(f"Error on {url}: {e}")
 
+
 def download_images(data):
+    """
+    Orchestrates the concurrent download of images.
+
+    Args:
+        data (pd.DataFrame): The processed DataFrame containing image URLs 
+            and unique identifiers.
+
+    Returns:
+        None
+    """
     ids = data[TARGET_VALUES[1]["key"]]
     verso_urls = data[TARGET_VALUES[25]["key"]].tolist()
     recto_urls = data[TARGET_VALUES[26]["key"]].tolist()
@@ -42,7 +64,6 @@ def download_images(data):
         os.makedirs(recto_dir)
     if not os.path.exists(verso_dir):
         os.makedirs(verso_dir)
-    
     tasks = []
     for i, url in enumerate(verso_urls):
         tasks.append((url, f'{verso_dir}/{ids[i]}-v.jpg'))
@@ -53,6 +74,16 @@ def download_images(data):
 
 
 def data_prep(data):
+    """
+    Prepares the final CSV for automatic import with metadata mapping.
+
+    Args:
+        data (str): Path to the merged intermediate CSV file.
+
+    Returns:
+        None: The function writes the final CSV to the path defined by 
+            OUTPUT_PUBLISH.
+    """
     df = pd.read_csv(data)
     df["special_document"] = "file:disegni/" + df[TARGET_VALUES[1]["key"]].astype(str) + "-v.jpg"
     df["special_attachments"] = "disegni/" + df[TARGET_VALUES[1]["key"]].astype(str) + "-v.jpg; disegni/" + df[TARGET_VALUES[1]["key"]].astype(str) + "-r.jpg"
