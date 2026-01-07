@@ -2,9 +2,9 @@
 
 API_ENDPOINT = "https://bbcc.regione.emilia-romagna.it/samira/api/card/"
 IMAGE_PREFIX = "https://bbcc.regione.emilia-romagna.it/pater/data"
-ID_LIST = "data/lista_link_liverani_pater.txt"
+ID_LIST = "data/id_pater.txt"
 API_OUTPUT = "data/dataset_pater.csv"
-DATASET_MANUAL = "data/vedute.csv"
+DATASET_MANUAL = "data/dataset_de.csv"
 BATCH = 50
 COLUMNS = [
     "id",
@@ -14,7 +14,7 @@ COLUMNS = [
     "latitude",
     "longitude"
 ]
-OUTPUT_ARCHIVE = "data/dataset_disegni.csv"
+OUTPUT_ARCHIVE = "data/dataset_liverani.csv"
 OUTPUT_PUBLISH = "data/db_liverani.csv"
 KEY = "id"
 
