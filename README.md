@@ -16,6 +16,7 @@ This system processes a collection of drawings. It combines descriptive metadata
 * ***Tainacan ready***: Automatically formats column headers using a specific syntax (e.g., `Title|text|status_public`) for the WordPress Tainacan CSV importer.
 
 ### Project structure
+* `data`: Folder containing the project's data.
 * `main.py`: Pipeline orchestrator.
 * `config.py`: Centralised configuration file.
 * `src/extract.py`: Extraction engine that uses JSONPath.
@@ -31,21 +32,25 @@ This project relies on [uv](https://github.com/astral-sh/uv) for fast and reliab
 curl -LsSf https://astral-sh.uv/install.sh | sh
 ```
 
-2. **Project synchronization**: Create the virtual environment and install dependencies with a single command:
+2. **Virtual environment creation**: Within the project folder, create the environment with:
+
+```bash
+uv init .
+```
+
+3. **Project synchronization**: Install dependencies with:
 
 ```bash
 uv sync
 ```
 
-3. **Configuration**: Verify directory paths and the metadata CSV file in `config.py`.
+4. **Configuration**: Verify directory paths and file paths in `config.py`.
 
-4. **Execution**: Run the processing pipeline using `uv`:
+5. **Execution**: Run the processing pipeline using `uv`:
 
 ```bash
 uv run main.py
 ```
-
-5. **Output**: The script will generate a CSV dataset containing the data downloaded from Pater, another CSV dataset containing complete integrated data, and a third CSV dataset formatted for Tainacan import.
 
 
 ## 🇮🇹 Versione italiana
@@ -74,18 +79,22 @@ Questo progetto utilizza [uv](https://github.com/astral-sh/uv) per una gestione 
 curl -LsSf https://astral-sh.uv/install.sh | sh
 ```
 
-2. **Sincronizzazione progetto**: Crea l'ambiente virtuale e installa le dipendenze con:
+2. **Creazione dell'ambiente virtuale**: Nella cartella di progetto, inizializza l'ambiente con:
+
+```bash
+uv init .
+```
+
+3. **Sincronizzazione progetto**: Installa le dipendenze con:
 
 ```bash
 uv sync
 ```
 
-3. **Configurazione**: Verifica i percorsi delle directory e del file CSV in `config.py`.
+4. **Configurazione**: Verifica i percorsi delle directory e dei file in `config.py`.
 
-4. **Esecuzione**: Avvia la pipeline di elaborazione tramite `uv`:
+5. **Esecuzione**: Avvia la pipeline di elaborazione tramite `uv`:
 
 ```bash
 uv run main.py
 ```
-
-5. **Risultato**: Il comando genererà un dataset CSV contenente i dati estratti dall'API, un altro dataset CSV contenente i dati completi e un terzo dataset CSV formattato per l'importazione automatica in Tainacan.
