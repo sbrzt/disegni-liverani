@@ -4,6 +4,9 @@ authors:
   - family-names: Barzaghi
     given-names: Sebastian
     orcid: https://orcid.org/0000-0002-0799-1527
-title: "My Research Software"
+title: "Arte e territorio: nuovi approcci e strumenti digitali per una fruizione più accessibile e interattiva al patrimonio culturale - Data processing script"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.18402599
 version: 0.1.0
 date-released: 2026-01-28
