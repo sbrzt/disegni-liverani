@@ -1,4 +1,4 @@
-# Disegni Liverani
+# Arte e territorio: nuovi approcci e strumenti digitali per una fruizione più accessibile e interattiva al patrimonio culturale
 
 🇺🇸: This project automates the integration of descriptive metadata for the management of a digital archive for Liverani's drawings on WordPress via the Tainacan plugin.
 
